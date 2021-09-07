@@ -1,4 +1,4 @@
-name: RT-Thread stm32f401ccu6
+name: RTT STM32F401CCU6
 
 on:
   push:
