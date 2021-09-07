@@ -1,0 +1,50 @@
+name: RT-Thread stm32f401ccu6
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - documentation/**
+      - '**/README.md'
+  pull_request:
+    branches: [ master ]
+    paths-ignore:
+      - documentation/**
+      - '**/README.md'
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@master
+      with:
+        python-version: 3.8
+        
+    - name: Install Tools
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get -qq install gcc-multilib libsdl-dev scons
+        echo "RTT_ROOT=${{ github.workspace }}" >> $GITHUB_ENV
+        echo "RTT_CC=gcc" >> $GITHUB_ENV
+        
+    - name: Install Arm ToolChains
+      if: ${{ success() }}
+      shell: bash
+      run: |
+        wget -q https://developer.arm.com/-/media/Files/downloads/gnu-rm/10-2020q4/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2
+        sudo tar xjf gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2 -C /opt
+        /opt/gcc-arm-none-eabi-10-2020-q4-major/bin/arm-none-eabi-gcc --version
+        echo "RTT_EXEC_PATH=/opt/gcc-arm-none-eabi-10-2020-q4-major/bin" >> $GITHUB_ENV
+    
+    - name: Scons Compile
+      if: ${{ success() }}
+      shell: bash
+      env:
+        RTT_TOOL_CHAIN: 'sourcery-arm'
+      run: |
+        scons
