@@ -5,11 +5,13 @@ on:
     branches: [ master ]
     paths-ignore:
       - documentation/**
+      - figures/**
       - '**/README.md'
   pull_request:
     branches: [ master ]
     paths-ignore:
       - documentation/**
+      - figures/**
       - '**/README.md'
 jobs:
   build:
