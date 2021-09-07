@@ -1,4 +1,4 @@
-name: RTT STM32F401CCU6
+name: RTT STM32F401
 
 on:
   push:
