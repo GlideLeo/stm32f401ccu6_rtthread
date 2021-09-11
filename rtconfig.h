@@ -202,6 +202,12 @@
 
 /* Micrium: Micrium software products porting for RT-Thread */
 
+#define PKG_USING_FAL
+#define FAL_DEBUG_CONFIG
+#define FAL_DEBUG 1
+#define FAL_PART_HAS_TABLE_CFG
+#define PKG_USING_FAL_V00500
+#define PKG_FAL_VER_NUM 0x00500
 
 /* peripheral libraries and drivers */
 
@@ -231,6 +237,7 @@
 #define BSP_USING_UART
 #define BSP_USING_UART1
 #define BSP_USING_UART2
+#define BSP_USING_ON_CHIP_FLASH
 #define BSP_USING_ADC
 #define BSP_USING_ADC1
 #define BSP_USING_WDT

@@ -1,7 +1,7 @@
 /*
  * @Author: JunQiLiu
  * @Date: 2021-09-07 12:47:01
- * @LastEditTime: 2021-09-11 15:44:05
+ * @LastEditTime: 2021-09-11 17:15:44
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\applications\main.c
  *  
@@ -23,6 +23,7 @@
 #include "modbus_slave_app.h"
 #include "adc_app.h"
 #include <vconsole.h>
+#include <fal.h>
 
 /* defined the LED0 pin: PB1 */
 #define LED0_PIN    GET_PIN(C, 13)
@@ -90,7 +91,8 @@ int main(void)
     /* set LED0 pin mode to output */
     rt_pin_mode(LED0_PIN, PIN_MODE_OUTPUT);
     
-    change_shell();
+    // change_shell();
+    fal_init();
     wdtStart();
     modbusSlaveAppStart();
 

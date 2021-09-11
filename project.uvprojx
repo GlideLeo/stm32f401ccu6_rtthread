@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, __RTTHREAD__, STM32F401xC, __CLK_TCK=RT_TICK_PER_SECOND</Define>
               <Undefine></Undefine>
-              <IncludePath>applications;.;rt-thread\libcpu\arm\common;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;board;board\CubeMX_Config\Inc;libraries\HAL_Drivers;libraries\HAL_Drivers\config;rt-thread\components\finsh;packages\freemodbus-latest\modbus\include;packages\freemodbus-latest\modbus\rtu;packages\freemodbus-latest\modbus\ascii;packages\freemodbus-latest\modbus\tcp;packages\freemodbus-latest\port;.;rt-thread\include;rt-thread\components\libc\compilers\common;rt-thread\components\libc\compilers\common\none-gcc;libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Inc;libraries\STM32F4xx_HAL\CMSIS\Device\ST\STM32F4xx\Include;libraries\STM32F4xx_HAL\CMSIS\Include;rt-thread\components\drivers\usb\usbdevice;rt-thread\components\utilities\ulog;packages\vconsole-latest;.</IncludePath>
+              <IncludePath>applications;.;rt-thread\libcpu\arm\common;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;board;board\CubeMX_Config\Inc;libraries\HAL_Drivers;libraries\HAL_Drivers\config;libraries\HAL_Drivers\drv_flash;packages\fal-v0.5.0\inc;rt-thread\components\finsh;packages\freemodbus-latest\modbus\include;packages\freemodbus-latest\modbus\rtu;packages\freemodbus-latest\modbus\ascii;packages\freemodbus-latest\modbus\tcp;packages\freemodbus-latest\port;.;rt-thread\include;rt-thread\components\libc\compilers\common;rt-thread\components\libc\compilers\common\none-gcc;libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Inc;libraries\STM32F4xx_HAL\CMSIS\Device\ST\STM32F4xx\Include;libraries\STM32F4xx_HAL\CMSIS\Include;rt-thread\components\drivers\usb\usbdevice;rt-thread\components\utilities\ulog;packages\vconsole-latest;.</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -389,6 +389,11 @@
               <FilePath>applications\modbus_slave_app.c</FilePath>
             </File>
             <File>
+              <FileName>fal_flash_stm32f4_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\fal_flash_stm32f4_port.c</FilePath>
+            </File>
+            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>applications\main.c</FilePath>
@@ -419,14 +424,14 @@
               <FilePath>rt-thread\libcpu\arm\common\backtrace.c</FilePath>
             </File>
             <File>
-              <FileName>cpuport.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\libcpu\arm\cortex-m4\cpuport.c</FilePath>
-            </File>
-            <File>
               <FileName>context_rvds.S</FileName>
               <FileType>2</FileType>
               <FilePath>rt-thread\libcpu\arm\cortex-m4\context_rvds.S</FilePath>
+            </File>
+            <File>
+              <FileName>cpuport.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\libcpu\arm\cortex-m4\cpuport.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -464,19 +469,9 @@
               <FilePath>rt-thread\components\drivers\src\dataqueue.c</FilePath>
             </File>
             <File>
-              <FileName>ringblk_buf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\src\ringblk_buf.c</FilePath>
-            </File>
-            <File>
               <FileName>waitqueue.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\drivers\src\waitqueue.c</FilePath>
-            </File>
-            <File>
-              <FileName>workqueue.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\src\workqueue.c</FilePath>
             </File>
             <File>
               <FileName>completion.c</FileName>
@@ -484,14 +479,24 @@
               <FilePath>rt-thread\components\drivers\src\completion.c</FilePath>
             </File>
             <File>
+              <FileName>ringbuffer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\src\ringbuffer.c</FilePath>
+            </File>
+            <File>
+              <FileName>ringblk_buf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\src\ringblk_buf.c</FilePath>
+            </File>
+            <File>
               <FileName>pipe.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\drivers\src\pipe.c</FilePath>
             </File>
             <File>
-              <FileName>ringbuffer.c</FileName>
+              <FileName>workqueue.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\src\ringbuffer.c</FilePath>
+              <FilePath>rt-thread\components\drivers\src\workqueue.c</FilePath>
             </File>
             <File>
               <FileName>watchdog.c</FileName>
@@ -519,6 +524,11 @@
               <FilePath>board\board.c</FilePath>
             </File>
             <File>
+              <FileName>drv_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\HAL_Drivers\drv_adc.c</FilePath>
+            </File>
+            <File>
               <FileName>drv_gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\HAL_Drivers\drv_gpio.c</FilePath>
@@ -534,9 +544,9 @@
               <FilePath>libraries\HAL_Drivers\drv_wdt.c</FilePath>
             </File>
             <File>
-              <FileName>drv_adc.c</FileName>
+              <FileName>drv_flash_f4.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\HAL_Drivers\drv_adc.c</FilePath>
+              <FilePath>libraries\HAL_Drivers\drv_flash\drv_flash_f4.c</FilePath>
             </File>
             <File>
               <FileName>drv_usart.c</FileName>
@@ -547,6 +557,100 @@
               <FileName>drv_common.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\HAL_Drivers\drv_common.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>fal</GroupName>
+          <GroupOption>
+            <CommonProperty>
+              <UseCPPCompiler>0</UseCPPCompiler>
+              <RVCTCodeConst>0</RVCTCodeConst>
+              <RVCTZI>0</RVCTZI>
+              <RVCTOtherData>0</RVCTOtherData>
+              <ModuleSelection>0</ModuleSelection>
+              <IncludeInBuild>1</IncludeInBuild>
+              <AlwaysBuild>0</AlwaysBuild>
+              <GenerateAssemblyFile>0</GenerateAssemblyFile>
+              <AssembleAssemblyFile>0</AssembleAssemblyFile>
+              <PublicsOnly>0</PublicsOnly>
+              <StopOnExitCode>3</StopOnExitCode>
+              <CustomArgument></CustomArgument>
+              <IncludeLibraryModules></IncludeLibraryModules>
+              <ComprImg>0</ComprImg>
+            </CommonProperty>
+            <GroupArmAds>
+              <Cads>
+                <interw>2</interw>
+                <Optim>0</Optim>
+                <oTime>2</oTime>
+                <SplitLS>2</SplitLS>
+                <OneElfS>2</OneElfS>
+                <Strict>2</Strict>
+                <EnumInt>2</EnumInt>
+                <PlainCh>2</PlainCh>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <wLevel>0</wLevel>
+                <uThumb>2</uThumb>
+                <uSurpInc>2</uSurpInc>
+                <uC99>2</uC99>
+                <uGnu>2</uGnu>
+                <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>2</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define> </Define>
+                  <Undefine> </Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Cads>
+              <Aads>
+                <interw>2</interw>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <thumb>2</thumb>
+                <SplitLS>2</SplitLS>
+                <SwStkChk>2</SwStkChk>
+                <NoWarn>2</NoWarn>
+                <uSurpInc>2</uSurpInc>
+                <useXO>2</useXO>
+                <ClangAsOpt>0</ClangAsOpt>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Aads>
+            </GroupArmAds>
+          </GroupOption>
+          <Files>
+            <File>
+              <FileName>fal_partition.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\fal-v0.5.0\src\fal_partition.c</FilePath>
+            </File>
+            <File>
+              <FileName>fal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\fal-v0.5.0\src\fal.c</FilePath>
+            </File>
+            <File>
+              <FileName>fal_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\fal-v0.5.0\src\fal_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>fal_rtt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\fal-v0.5.0\src\fal_rtt.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -659,39 +763,9 @@
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
-              <FileName>ipc.c</FileName>
+              <FileName>components.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\src\ipc.c</FilePath>
-            </File>
-            <File>
-              <FileName>scheduler.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\src\scheduler.c</FilePath>
-            </File>
-            <File>
-              <FileName>device.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\src\device.c</FilePath>
-            </File>
-            <File>
-              <FileName>thread.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\src\thread.c</FilePath>
-            </File>
-            <File>
-              <FileName>kservice.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\src\kservice.c</FilePath>
-            </File>
-            <File>
-              <FileName>irq.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\src\irq.c</FilePath>
-            </File>
-            <File>
-              <FileName>idle.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\src\idle.c</FilePath>
+              <FilePath>rt-thread\src\components.c</FilePath>
             </File>
             <File>
               <FileName>mempool.c</FileName>
@@ -699,14 +773,14 @@
               <FilePath>rt-thread\src\mempool.c</FilePath>
             </File>
             <File>
-              <FileName>components.c</FileName>
+              <FileName>device.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\src\components.c</FilePath>
+              <FilePath>rt-thread\src\device.c</FilePath>
             </File>
             <File>
-              <FileName>mem.c</FileName>
+              <FileName>kservice.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\src\mem.c</FilePath>
+              <FilePath>rt-thread\src\kservice.c</FilePath>
             </File>
             <File>
               <FileName>object.c</FileName>
@@ -714,14 +788,44 @@
               <FilePath>rt-thread\src\object.c</FilePath>
             </File>
             <File>
-              <FileName>clock.c</FileName>
+              <FileName>thread.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\src\clock.c</FilePath>
+              <FilePath>rt-thread\src\thread.c</FilePath>
+            </File>
+            <File>
+              <FileName>irq.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\src\irq.c</FilePath>
+            </File>
+            <File>
+              <FileName>scheduler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\src\scheduler.c</FilePath>
             </File>
             <File>
               <FileName>timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\src\timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>mem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\src\mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\src\clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>ipc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\src\ipc.c</FilePath>
+            </File>
+            <File>
+              <FileName>idle.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\src\idle.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -738,6 +842,11 @@
         <Group>
           <GroupName>Libraries</GroupName>
           <Files>
+            <File>
+              <FileName>stm32f4xx_hal_flash_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c</FilePath>
+            </File>
             <File>
               <FileName>stm32f4xx_hal_hcd.c</FileName>
               <FileType>1</FileType>
@@ -849,6 +958,11 @@
               <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cryp.c</FilePath>
             </File>
             <File>
+              <FileName>stm32f4xx_hal_flash_ramfunc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ramfunc.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32f4xx_hal.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</FilePath>
@@ -862,6 +976,11 @@
               <FileName>stm32f4xx_hal_cec.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cec.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c</FilePath>
             </File>
             <File>
               <FileName>system_stm32f4xx.c</FileName>

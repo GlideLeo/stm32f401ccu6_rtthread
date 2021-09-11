@@ -37,6 +37,10 @@ menu "On-chip Peripheral Drivers"
                 default y
         endif
     
+    config BSP_USING_ON_CHIP_FLASH
+        bool "Enable on-chip FLASH"
+        default n
+
     menuconfig BSP_USING_ADC
         bool "Enable ADC"
         default n

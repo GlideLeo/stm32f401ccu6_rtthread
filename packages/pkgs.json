@@ -8,5 +8,10 @@
   "path": "/packages/tools/vconsole", 
   "ver": "latest", 
   "name": "VCONSOLE"
+ }, 
+ {
+  "path": "/packages/system/fal", 
+  "ver": "v0.5.0", 
+  "name": "FAL"
  }
 ]
