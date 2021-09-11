@@ -1,7 +1,7 @@
 /*
  * @Author: JunQiLiu
  * @Date: 2021-09-07 12:47:01
- * @LastEditTime: 2021-09-11 14:14:44
+ * @LastEditTime: 2021-09-11 15:25:33
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\applications\main.c
  *  
@@ -72,11 +72,24 @@ static int wdtStart(void)
     return ret;
 }
 
+static rt_device_t vcom_shell_device = NULL;
+void change_shell(void)
+{
+    vcom_shell_device = rt_device_find("vcom");
+    if (vcom_shell_device)
+    {
+        vconsole_switch(vcom_shell_device);
+    }
+}
+
+
 int main(void)
 {
     int count = 1;
     /* set LED0 pin mode to output */
     rt_pin_mode(LED0_PIN, PIN_MODE_OUTPUT);
+    
+    change_shell();
     wdtStart();
     modbusSlaveAppStart();
 

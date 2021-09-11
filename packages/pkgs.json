@@ -3,5 +3,10 @@
   "path": "/packages/iot/freemodbus", 
   "ver": "latest", 
   "name": "FREEMODBUS"
+ }, 
+ {
+  "path": "/packages/tools/vconsole", 
+  "ver": "latest", 
+  "name": "VCONSOLE"
  }
 ]

@@ -1,7 +1,7 @@
 /*
  * @Author: JunQiLiu
  * @Date: 2021-09-07 11:46:06
- * @LastEditTime: 2021-09-11 09:47:22
+ * @LastEditTime: 2021-09-11 14:19:11
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\board\board.c
  *  
@@ -36,9 +36,9 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 25;
-  RCC_OscInitStruct.PLL.PLLN = 168;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 4;
+  RCC_OscInitStruct.PLL.PLLN = 336;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
+  RCC_OscInitStruct.PLL.PLLQ = 7;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
