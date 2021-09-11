@@ -1,7 +1,7 @@
 '''
 Author: JunQiLiu
 Date: 2021-09-07 12:47:01
-LastEditTime: 2021-09-11 09:28:39
+LastEditTime: 2021-09-11 11:05:46
 Description: 
 FilePath: \stm32f401ccu6_rtthread\applications\SConscript
  
@@ -14,6 +14,7 @@ CPPPATH = [cwd, str(Dir('#'))]
 src     = Split("""
 main.c
 modbus_slave_app.c
+adc_app.c
 """)
 
 group = DefineGroup('Applications', src, depend = [''], CPPPATH = CPPPATH)

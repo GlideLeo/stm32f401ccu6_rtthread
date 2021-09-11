@@ -1,7 +1,7 @@
 <!--
  * @Author: JunQiLiu
  * @Date: 2021-09-07 12:47:01
- * @LastEditTime: 2021-09-11 10:55:46
+ * @LastEditTime: 2021-09-11 13:57:07
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\README.md
  *  
@@ -41,7 +41,7 @@
 | RTC               |   支持   | 软件RTC                              |
 | USB Device        |   暂不支持   | 即将支持                              |
 | IWG               |   暂不支持   | 即将支持                              |
-| ADC               |   暂不支持   | 即将支持                              |
+| ADC               |   支持   | 通道1\4\5\6\7\8\9\tempraure                              |
 | **扩展模块**      | **支持情况** | **备注**                              |
 |          |     |                                      |
 
@@ -51,6 +51,7 @@
 |-|-|-|
 |freemodbus|已支持RTU|使用UART2|
 |ulog|以支持||
+|easyflash|待支持| |
 
 
 ## 运行结果

@@ -1,7 +1,7 @@
 /*
  * @Author: JunQiLiu
  * @Date: 2021-09-11 09:20:34
- * @LastEditTime: 2021-09-11 09:38:25
+ * @LastEditTime: 2021-09-11 12:20:43
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\applications\modbus_slave_app.c
  *  
@@ -86,7 +86,7 @@ static void mb_slave_poll(void *parameter)
 
 int modbusSlaveAppStart(void)
 {
-    rt_thread_t tid1 = RT_NULL, tid2 = RT_NULL;
+    rt_thread_t tid1 = RT_NULL;//, tid2 = RT_NULL;
 
     tid1 = rt_thread_create("md_s_poll", mb_slave_poll, "RTU", 1024, MB_POLL_THREAD_PRIORITY, 10);
     if (tid1 != RT_NULL)
@@ -98,23 +98,23 @@ int modbusSlaveAppStart(void)
         goto __exit;
     }
 
-    tid2 = rt_thread_create("md_s_send", send_thread_entry, RT_NULL, 512, MB_SEND_THREAD_PRIORITY, 10);
-    if (tid2 != RT_NULL)
-    {
-        rt_thread_startup(tid2);
-    }
-    else
-    {
-        goto __exit;
-    }
+    // tid2 = rt_thread_create("md_s_send", send_thread_entry, RT_NULL, 512, MB_SEND_THREAD_PRIORITY, 10);
+    // if (tid2 != RT_NULL)
+    // {
+    //     rt_thread_startup(tid2);
+    // }
+    // else
+    // {
+    //     goto __exit;
+    // }
 
     return RT_EOK;
 
 __exit:
     if (tid1)
         rt_thread_delete(tid1);
-    if (tid2)
-        rt_thread_delete(tid2);
+    // if (tid2)
+    //     rt_thread_delete(tid2);
 
     return -RT_ERROR;
 }

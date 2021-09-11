@@ -1,7 +1,7 @@
 /*
  * @Author: JunQiLiu
  * @Date: 2021-09-07 12:47:01
- * @LastEditTime: 2021-09-11 09:34:34
+ * @LastEditTime: 2021-09-11 12:21:29
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\applications\main.c
  *  
@@ -21,6 +21,7 @@
 #include <board.h>
 
 #include "modbus_slave_app.h"
+#include "adc_app.h"
 
 /* defined the LED0 pin: PB1 */
 #define LED0_PIN    GET_PIN(C, 13)
@@ -32,6 +33,14 @@ int main(void)
     rt_pin_mode(LED0_PIN, PIN_MODE_OUTPUT);
 
     modbusSlaveAppStart();
+
+    rt_thread_t adc_tid;
+    adc_tid = rt_thread_create("M_Slave",
+                            adcGetValueEntry, RT_NULL,
+                            1024,
+                            15, 10);
+    if (adc_tid != RT_NULL)
+		rt_thread_startup(adc_tid);
 
     while (count++)
     {
