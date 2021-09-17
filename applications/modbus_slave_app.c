@@ -1,7 +1,7 @@
 /*
  * @Author: JunQiLiu
  * @Date: 2021-09-11 09:20:34
- * @LastEditTime: 2021-09-11 12:20:43
+ * @LastEditTime: 2021-09-18 01:35:58
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\applications\modbus_slave_app.c
  *  
@@ -20,7 +20,7 @@
 #define MB_POLL_THREAD_PRIORITY  10
 #define MB_SEND_THREAD_PRIORITY  RT_THREAD_PRIORITY_MAX - 1
 
-#define MB_POLL_CYCLE_MS 100
+#define MB_POLL_CYCLE_MS 50
 
 extern USHORT usSRegHoldBuf[S_REG_HOLDING_NREGS];
 
@@ -46,10 +46,13 @@ static void send_thread_entry(void *parameter)
 
 static void mb_slave_poll(void *parameter)
 {
+    uint8_t         ucSlaveAddr = usSRegHoldBuf[1];\
+    uint8_t readBuf[8];
+    rt_base_t level;
     if (rt_strstr(parameter, "RTU"))
     {
 #ifdef PKG_MODBUS_SLAVE_RTU
-        eMBInit(MB_RTU, SLAVE_ADDR, PORT_NUM, PORT_BAUDRATE, PORT_PARITY);
+        eMBInit(MB_RTU, ucSlaveAddr, PORT_NUM, PORT_BAUDRATE, PORT_PARITY);
         LOG_D("Modbus RTU Slave Init");
 #else
         rt_kprintf("Error: Please open RTU mode first");
@@ -79,6 +82,16 @@ static void mb_slave_poll(void *parameter)
     while (1)
     {
         eMBPoll();
+        if(ucSlaveAddr != usSRegHoldBuf[1])
+        {
+            level = rt_hw_interrupt_disable();
+            fal_partition_read(fal_partition_find("ef"),0,readBuf,8);
+            fal_partition_erase(fal_partition_find("ef"),0,8);
+            readBuf[0] = usSRegHoldBuf[1];
+            fal_partition_write(fal_partition_find("ef"),0,readBuf,8);
+            rt_hw_interrupt_enable(level);
+            rt_hw_cpu_reset();
+        }
         rt_thread_mdelay(MB_POLL_CYCLE_MS);
     }
 }

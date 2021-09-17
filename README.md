@@ -1,7 +1,7 @@
 <!--
  * @Author: JunQiLiu
  * @Date: 2021-09-07 12:47:01
- * @LastEditTime: 2021-09-11 18:04:04
+ * @LastEditTime: 2021-09-18 00:52:59
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\README.md
  *  
@@ -39,9 +39,8 @@
 | SPI               |   暂不支持     |                               |
 | I2C               |   暂不支持     |                              |
 | RTC               |   支持   | 软件RTC                              |
-| USB Device        |   暂不支持   | 即将支持                              |
 | IWG               |   暂不支持   | 即将支持                              |
-| ADC               |   支持   | 通道1\4\5\6\7\8\9\tempraure                              |
+| ADC               |   支持   | 通道1\4\5\6\7\8\9\tempraure |
 | **扩展模块**      | **支持情况** | **备注**                              |
 |          |     |                                      |
 
@@ -52,7 +51,7 @@
 |freemodbus|已支持RTU|使用UART2|
 |ulog|已支持| |
 |FAL|已支持| |
-|easyflash|已支持| |
+|easyflash|无法支持|只有一个128K扇区空余，不满足要求|
 
 
 ## 运行结果
