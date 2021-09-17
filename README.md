@@ -1,7 +1,7 @@
 <!--
  * @Author: JunQiLiu
  * @Date: 2021-09-07 12:47:01
- * @LastEditTime: 2021-09-11 15:49:40
+ * @LastEditTime: 2021-09-11 18:04:04
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\README.md
  *  
@@ -50,8 +50,9 @@
 |**包名称**|**支持情况**|**备注**|
 |-|-|-|
 |freemodbus|已支持RTU|使用UART2|
-|ulog|以支持||
-|easyflash|待支持| |
+|ulog|已支持| |
+|FAL|已支持| |
+|easyflash|已支持| |
 
 
 ## 运行结果

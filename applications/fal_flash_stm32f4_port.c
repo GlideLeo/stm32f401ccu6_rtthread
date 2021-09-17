@@ -1,7 +1,7 @@
 /*
  * @Author: JunQiLiu
  * @Date: 2021-09-11 16:25:58
- * @LastEditTime: 2021-09-11 17:22:47
+ * @LastEditTime: 2021-09-11 18:18:46
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\applications\fal_flash_stm32f4_port.c
  *  
@@ -54,4 +54,4 @@ static int erase(long offset, size_t size)
 	return stm32_flash_erase(stm32f4_onchip_flash.addr + offset, size);
 }
 
-const struct fal_flash_dev stm32f4_onchip_flash = {"onchip_flash", 0x08000000, 256 * 1024, 128 * 1024, {init, read, write, erase}};
+const struct fal_flash_dev stm32f4_onchip_flash = {"onchip_flash", 0x08020000, 128 * 1024, 128 * 1024, {init, read, write, erase}};

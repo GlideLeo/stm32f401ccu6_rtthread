@@ -1,7 +1,7 @@
 /*
  * @Author: JunQiLiu
  * @Date: 2021-04-26 01:34:14
- * @LastEditTime: 2021-09-11 17:36:17
+ * @LastEditTime: 2021-09-11 18:19:24
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\applications\fal_cfg.h
  *  
@@ -59,7 +59,7 @@ extern const struct fal_flash_dev stm32f4_onchip_flash;
 /* partition table */
 #define FAL_PART_TABLE                                                               \
 {                                                                                    \
-    {FAL_PART_MAGIC_WROD,        "env",     "onchip_flash",	               128 * 1024,     128 * 1024, 0}, \
+    {FAL_PART_MAGIC_WROD,        "ef",     "onchip_flash",	 0,     128 * 1024, 0}, \
 }
 #endif /* FAL_PART_HAS_TABLE_CFG */
 
