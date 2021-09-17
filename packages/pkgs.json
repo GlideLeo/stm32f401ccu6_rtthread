@@ -5,11 +5,6 @@
   "name": "FREEMODBUS"
  }, 
  {
-  "path": "/packages/tools/EasyFlash", 
-  "ver": "v4.1.0", 
-  "name": "EASYFLASH"
- }, 
- {
   "path": "/packages/tools/vconsole", 
   "ver": "latest", 
   "name": "VCONSOLE"
