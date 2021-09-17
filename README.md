@@ -1,17 +1,18 @@
 <!--
  * @Author: JunQiLiu
  * @Date: 2021-09-07 12:47:01
- * @LastEditTime: 2021-09-18 00:52:59
+ * @LastEditTime: 2021-09-18 02:04:26
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\README.md
  *  
 -->
-# STM32F401CCU6 rt-thread工程模板
+# STM32F401CCU6 rt-thread modbus工程模板
 
 [![RTT_STM32F401](https://github.com/JassyL/stm32f401ccu6_rtthread/actions/workflows/scons.yml/badge.svg)](https://github.com/JassyL/stm32f401ccu6_rtthread/actions/workflows/scons.yml)
 ## 简介
 
-本项目为 STM32F401CCU6 核心板的rt-thread工程模板。
+本项目为目前市面上比较便宜的核心板 STM32F401CCU6 的rt-thread工程模板，配置了FinSH(命令行支持)、FAL(Flash 抽象层)、freemodbus(armink移植的freemodbus组件)、USB虚拟串口以及ADC等功能，可用于制作各类modbus RTU slave节点。
+
 ## 开发板介绍
 
 开发板外观如下图所示：
@@ -41,9 +42,6 @@
 | RTC               |   支持   | 软件RTC                              |
 | IWG               |   暂不支持   | 即将支持                              |
 | ADC               |   支持   | 通道1\4\5\6\7\8\9\tempraure |
-| **扩展模块**      | **支持情况** | **备注**                              |
-|          |     |                                      |
-
 
 ## 扩展包支持
 |**包名称**|**支持情况**|**备注**|
@@ -52,31 +50,33 @@
 |ulog|已支持| |
 |FAL|已支持| |
 |easyflash|无法支持|只有一个128K扇区空余，不满足要求|
+|USB CDC|支持| |
 
 
-## 运行结果
+## 运行
 
 下载程序成功之后，系统会自动运行。
 
-连接开发板对应串口到 PC , 在终端工具里打开相应的串口（115200-8-1-N），复位设备后，可以看到 RT-Thread 的输出信息:
+连接开发板串口1(或开启USB虚拟串口)到 PC , 在终端工具里打开相应的串口（115200-8-1-N），复位设备后，可以看到 RT-Thread 的输出信息:
 
 ```bash
  \ | /
 - RT -     Thread Operating System
- / | \     4.0.4 build Sep 11 2021
+ / | \     4.0.4 build Sep 18 2021
  2006 - 2021 Copyright by rt-thread team
-msh >
+[D/FAL] (fal_flash_init:61) Flash device |             onchip_flash | addr: 0x08020000 | len                                                                                           : 0x00020000 | blk_size: 0x00020000 |initialized finish.
+[I/FAL] ==================== FAL partition table ====================
+[I/FAL] | name | flash_dev    |   offset   |    length  |
+[I/FAL] -------------------------------------------------------------
+[I/FAL] | ef   | onchip_flash | 0x00000000 | 0x00020000 |
+[I/FAL] =============================================================
+[I/FAL] RT-Thread Flash Abstraction Layer (V0.5.0) initialize success.
+msh >01-01 08:00:00 D/MB_Slave md_s_pol: Modbus RTU Slave Init
 ```
-## 进阶使用
 
-此 BSP 默认只开启了 GPIO 和 串口1 的功能，如果需使用更多高级功能，需要利用 ENV 工具对BSP 进行配置，步骤如下：
+使用 modbus poll 软件连接串口2,设置9600-8-1-N,示例只使用了10个保持寄存器，读取结果如下：
+![](https://qiniu.datasheep.cn/20210918015535.png)
 
-1. 在 bsp 下打开 env 工具。
 
-2. 输入`menuconfig`命令配置工程，配置好之后保存退出。
-
-3. 输入`pkgs --update`命令更新软件包。
-
-4. 输入`scons --target=mdk4/mdk5/iar` 命令重新生成工程。
-
-本章节更多详细的介绍请参考 [STM32 系列 BSP 外设驱动使用教程](../docs/STM32系列BSP外设驱动使用教程.md)。
+通过修改modbus地址对应的保持寄存器，板子会自动重启并启用新的地址：
+![](https://qiniu.datasheep.cn/adcmodbus.gif)
