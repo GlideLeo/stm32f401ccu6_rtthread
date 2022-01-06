@@ -1,7 +1,7 @@
 /*
  * @Author: JunQiLiu
  * @Date: 2021-09-07 12:47:01
- * @LastEditTime: 2021-09-18 01:29:11
+ * @LastEditTime: 2022-01-06 12:32:28
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\applications\main.c
  *  
@@ -25,6 +25,7 @@
 #include "adc_app.h"
 #include <vconsole.h>
 #include <fal.h>
+#include "i2c_app.h"
 extern USHORT usSRegHoldBuf[S_REG_HOLDING_NREGS];
 
 /* defined the LED0 pin: PB1 */
@@ -33,8 +34,6 @@ extern USHORT usSRegHoldBuf[S_REG_HOLDING_NREGS];
 #define WDT_DEVICE_NAME    "wdt"    /* 看门狗设备名称 */
 
 static rt_device_t wdg_dev;         /* 看门狗设备句柄 */
-
-const uint8_t testBuf[8] = {0x51, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 static void idle_hook(void)
 {
@@ -93,14 +92,11 @@ int main(void)
 {
     int count = 1;
     uint8_t readBuf[8];
-    /* set LED0 pin mode to output */
     rt_pin_mode(LED0_PIN, PIN_MODE_OUTPUT);
     
-    // change_shell();
+    // change_shell();  // 切换到虚拟串口
     fal_init();
-    // easyflash_init();
     wdtStart();
-    // fal_partition_write(fal_partition_find("ef"),0,testBuf,8);
     fal_partition_read(fal_partition_find("ef"),0,readBuf,8);
     if(readBuf[0] == 0xff)
     {
@@ -113,13 +109,14 @@ int main(void)
     
     modbusSlaveAppStart();
 
-    rt_thread_t adc_tid;
-    adc_tid = rt_thread_create("M_Slave",
-                            adcGetValueEntry, RT_NULL,
-                            1024,
-                            15, 10);
-    if (adc_tid != RT_NULL)
-		rt_thread_startup(adc_tid);
+    // rt_thread_t adc_tid;
+    // adc_tid = rt_thread_create("M_Slave",
+    //                         adcGetValueEntry, RT_NULL,
+    //                         1024,
+    //                         15, 10);
+    // if (adc_tid != RT_NULL)
+	// 	rt_thread_startup(adc_tid);
+
     // fal_partition_erase(fal_partition_find("ef"),0,8);
     // fal_partition_write(fal_partition_find("ef"),0,testBuf,8);
     // fal_partition_read(fal_partition_find("ef"),0,readBuf,8);
