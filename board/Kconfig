@@ -1,3 +1,4 @@
+
 menu "Hardware Drivers Config"
 
 config SOC_STM32F401CC
@@ -49,6 +50,23 @@ menu "On-chip Peripheral Drivers"
             config BSP_USING_ADC1
                 bool "Enable ADC1"
                 default n
+        endif
+    
+    menuconfig BSP_USING_I2C1
+        bool "Enable I2C1 BUS (software simulation)"
+        default y
+        select RT_USING_I2C
+        select RT_USING_I2C_BITOPS
+        select RT_USING_PIN
+        if BSP_USING_I2C1
+            config BSP_I2C1_SCL_PIN
+                int "i2c1 scl pin number"
+                range 0 143
+                default 24
+            config BSP_I2C1_SDA_PIN
+                int "I2C1 sda pin number"
+                range 0 143
+                default 25
         endif
     
     config BSP_USING_WDT
