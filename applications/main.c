@@ -1,7 +1,7 @@
 /*
  * @Author: JunQiLiu
  * @Date: 2021-09-07 12:47:01
- * @LastEditTime: 2022-01-06 12:32:28
+ * @LastEditTime: 2022-04-08 12:24:25
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\applications\main.c
  *  
@@ -23,10 +23,14 @@
 #include "modbus_slave_app.h"
 #include "user_mb_app.h"
 #include "adc_app.h"
+#include "input_app.h"
 #include <vconsole.h>
 #include <fal.h>
-#include "i2c_app.h"
 extern USHORT usSRegHoldBuf[S_REG_HOLDING_NREGS];
+
+#define LOG_TAG     "main"    
+#define LOG_LVL     LOG_LVL_INFO  
+#include <ulog.h>
 
 /* defined the LED0 pin: PB1 */
 #define LED0_PIN    GET_PIN(C, 13)
@@ -92,12 +96,13 @@ int main(void)
 {
     int count = 1;
     uint8_t readBuf[8];
+    /* set LED0 pin mode to output */
     rt_pin_mode(LED0_PIN, PIN_MODE_OUTPUT);
     
-    // change_shell();  // 切换到虚拟串口
+    // change_shell();
     fal_init();
     wdtStart();
-    fal_partition_read(fal_partition_find("ef"),0,readBuf,8);
+    fal_partition_read(fal_partition_find("ef"),127*1024,readBuf,8);
     if(readBuf[0] == 0xff)
     {
         usSRegHoldBuf[1] = 1;
@@ -108,6 +113,14 @@ int main(void)
     }
     
     modbusSlaveAppStart();
+    LOG_I("modbus slave address is %d",usSRegHoldBuf[1]);
+    rt_thread_t io_input_tid;
+    io_input_tid = rt_thread_create("IO_INPUT",
+                            ioInputGetValueEntry, RT_NULL,
+                            1024,
+                            15, 10);
+    if (io_input_tid != RT_NULL)
+    	rt_thread_startup(io_input_tid);
 
     // rt_thread_t adc_tid;
     // adc_tid = rt_thread_create("M_Slave",
@@ -119,7 +132,7 @@ int main(void)
 
     // fal_partition_erase(fal_partition_find("ef"),0,8);
     // fal_partition_write(fal_partition_find("ef"),0,testBuf,8);
-    // fal_partition_read(fal_partition_find("ef"),0,readBuf,8);
+    // fal_partition_read(fal_partition_find("ef"),127*1024,readBuf,8);
     // rt_kprintf("read: %02x %02x %02x %02x %02x %02x %02x %02x\n",readBuf[0],readBuf[1],readBuf[2],readBuf[3],readBuf[4],readBuf[5],readBuf[6],readBuf[7]);
 
     while (count++)
@@ -130,6 +143,5 @@ int main(void)
         rt_thread_mdelay(500);
     }
     
-
     return RT_EOK;
 }

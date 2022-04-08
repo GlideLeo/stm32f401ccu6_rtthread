@@ -1,4 +1,3 @@
-
 menu "Hardware Drivers Config"
 
 config SOC_STM32F401CC

@@ -1,7 +1,7 @@
 /*
  * @Author: JunQiLiu
  * @Date: 2021-09-11 09:20:34
- * @LastEditTime: 2021-09-18 01:35:58
+ * @LastEditTime: 2022-04-08 12:32:45
  * @Description: 
  * @FilePath: \stm32f401ccu6_rtthread\applications\modbus_slave_app.c
  *  
@@ -14,13 +14,13 @@
 
 #define SLAVE_ADDR      81
 #define PORT_NUM        2
-#define PORT_BAUDRATE   9600
+#define PORT_BAUDRATE   115200
 #define PORT_PARITY     MB_PAR_NONE
 
 #define MB_POLL_THREAD_PRIORITY  10
 #define MB_SEND_THREAD_PRIORITY  RT_THREAD_PRIORITY_MAX - 1
 
-#define MB_POLL_CYCLE_MS 50
+#define MB_POLL_CYCLE_MS 10
 
 extern USHORT usSRegHoldBuf[S_REG_HOLDING_NREGS];
 
@@ -46,7 +46,7 @@ static void send_thread_entry(void *parameter)
 
 static void mb_slave_poll(void *parameter)
 {
-    uint8_t         ucSlaveAddr = usSRegHoldBuf[1];\
+    uint8_t         ucSlaveAddr = usSRegHoldBuf[1];
     uint8_t readBuf[8];
     rt_base_t level;
     if (rt_strstr(parameter, "RTU"))
@@ -85,10 +85,10 @@ static void mb_slave_poll(void *parameter)
         if(ucSlaveAddr != usSRegHoldBuf[1])
         {
             level = rt_hw_interrupt_disable();
-            fal_partition_read(fal_partition_find("ef"),0,readBuf,8);
-            fal_partition_erase(fal_partition_find("ef"),0,8);
+            fal_partition_read(fal_partition_find("ef"),127*1024,readBuf,8);
+            fal_partition_erase(fal_partition_find("ef"),127*1024,8);
             readBuf[0] = usSRegHoldBuf[1];
-            fal_partition_write(fal_partition_find("ef"),0,readBuf,8);
+            fal_partition_write(fal_partition_find("ef"),127*1024,readBuf,8);
             rt_hw_interrupt_enable(level);
             rt_hw_cpu_reset();
         }
